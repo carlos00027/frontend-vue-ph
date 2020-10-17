@@ -90,7 +90,7 @@
                                             </div>
                                             <input 
                                             v-model="form.correo"
-                                            type="text" 
+                                            type="email" 
                                             class="form-control" 
                                             :class="classes"
                                             placeholder="Correo electrónico" 
@@ -141,8 +141,15 @@
                     <button 
                     type="button" 
                     class="btn btn-primary"
+                    :disabled="cargando"
                     @click="guardar"
                     >
+                        <span 
+                        class="spinner-border-sm" 
+                        :class="{'spinner-border': cargando}"
+                        role="status" 
+                        aria-hidden="true" 
+                        />
                         Guardar
                     </button>
                 </div>
@@ -153,12 +160,15 @@
 
 <script>
 import $ from 'jquery'
+import {clienteCrear} from '../../../services/clientes'
+import { mensaje } from '../../../utils/helper'
 export default {
     data(){
         return {
+            cargando: false,
             form:{
                 nombres: '',
-                docuemnto: '',
+                documento: '',
                 correo: '',
                 direccion: '',
             }
@@ -168,9 +178,31 @@ export default {
         toggle(){
             $(this.$refs.modal).modal('toggle')
         },
+        limpiar(){
+            this.form.nombres = ''
+            this.form.documento = ''
+            this.form.correo = ''
+            this.form.direccion = ''
+            this.$refs['form-cliente'].reset()
+        },
         async guardar(){
             const esValido = await this.$refs['form-cliente'].validate()
             if(!esValido) return 
+            try {
+                this.cargando = true;
+                const {status} = await clienteCrear(this.form)
+                this.cargando = false;
+                if(status === 201){
+                    mensaje('Mensaje','Creado con éxito','success')
+                    this.toggle()
+                    this.limpiar()
+                }
+                
+                
+            } catch (error) {
+                console.error(error);
+                this.cargando = false;
+            }
         }
     }
 }
