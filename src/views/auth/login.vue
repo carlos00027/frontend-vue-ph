@@ -124,7 +124,7 @@ export default {
                 if(status === 200){
                     await this.$store.dispatch('auth/saveToken',data)
                     await this.$store.dispatch('auth/fetchUser')
-                    this.$router.push({name: 'home'})
+                    this.$router.push({name: 'Home'})
                 }   
             } catch (error) {
                 this.cargando = false
