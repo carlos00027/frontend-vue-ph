@@ -4,7 +4,9 @@
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="icon-search"></i>
+                        </span>
                     </div>
                     <input 
                     v-model="valor"
@@ -104,7 +106,8 @@
 </template>
 
 <script>
-import {usuariosTraer} from '../../services/usuarios'
+import {usuariosEliminar, usuariosTraer} from '../../services/usuarios'
+import { confirmar, mensaje } from '../../utils/helper';
 export default {
     metaInfo:()=>({title: 'Usuarios'}),
     components:{
@@ -124,13 +127,23 @@ export default {
             },
             usuarioSel:{
                 id: null
-            }
+            },
+            buscar_ttl: 600 //milisegundos
         }
     },
     watch:{
         '$route.query'(path){
             console.log('watch ',path);
             this.fetch_usuarios()
+        },
+        valor(a){
+            if(window.buscando) clearInterval(window.buscando)
+            window.buscando = setTimeout(()=>{
+                console.log(a);
+                const query = this.$route.query
+                query.valor = a
+                this.$router.push({query})
+            },this.buscar_ttl)
         }
     },
     mounted(){
@@ -158,6 +171,17 @@ export default {
         usuarioEditar(row){
             this.usuarioSel = {...row}
             this.$refs['m-usuario'].toggle()
+        },
+        usuarioEliminar(usuario){
+            this.usuarioSel = usuario
+            confirmar().then(result=>{
+                if(result.isConfirmed){
+                    usuariosEliminar(usuario.id).then(m=>{
+                        mensaje('Mensaje','Eliminado con éxito','success')
+                        this.fetch_usuarios()
+                    })
+                }
+            })
         }
     }
 }

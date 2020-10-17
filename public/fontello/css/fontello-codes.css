@@ -2,6 +2,7 @@
 
  
 .icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-search:before { content: '\e03e'; } /* '' */
 .icon-eye:before { content: '\e09d'; } /* '' */
 .icon-plus:before { content: '\e0c1'; } /* '' */
 .icon-eye-off:before { content: '\e102'; } /* '' */
