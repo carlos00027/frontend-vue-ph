@@ -28,6 +28,11 @@ export default [
         ]
     },
     {
+        path: '/clientes',
+        name: 'clientes',
+        component: ()=>import('../views/clientes/index.vue').then(m=>m.default || m)
+    },
+    {
         path:'/reportes',
         name: 'reportes',
         component: ()=>import('../views/reportes/index.vue').then(m=>m.default || m)

@@ -14,7 +14,7 @@ export default {
 <style lang="scss">
 .ajuste7887{
     position: relative;
-    top: 56px;
+    top: 76px;
 }
 .modal{
     .modal-content{

@@ -25,17 +25,18 @@
                     </router-link>  
                 </li>
                 <li class="nav-item">
+                    <router-link :to="{name: 'clientes'}" class="nav-link" active-class="active">
+                        <i class="icon-users"></i>
+                        Clientes
+                    </router-link>
+                </li>
+                <li class="nav-item">
                     <router-link :to="{name: 'reportes'}" class="nav-link" active-class="active">
                         <i class="icon-chart-area"></i>
                         Reportes
                     </router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link :to="{name: 'medicamentos'}" class="nav-link" active-class="active">
-                        <i class="icon-pharmacy"></i>
-                        Clientes
-                    </router-link>
-                </li>
+                
                 <li class="nav-item">
                     <router-link :to="{name: 'medicamentos'}" class="nav-link" active-class="active">
                         <i class="icon-pharmacy"></i>

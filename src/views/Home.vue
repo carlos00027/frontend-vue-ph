@@ -22,7 +22,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home{
-  height: calc(100vh - 56px) !important;
+  height: calc(100vh - 76px) !important;
   display: flex;
   align-items: center;
   justify-content: center;
