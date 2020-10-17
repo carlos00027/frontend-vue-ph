@@ -1,14 +1,15 @@
 <template>
     <section class="container">
-        <div class="row my-4 justify-content-between">
-            <div class="col-12 col-sm-6 col-md-4">
+        <div class="row mt-4 justify-content-between">
+            <div class="col-12 col-sm-6 col-md-4 px-0">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">
+                        <span class="input-group-text bg-primary text-light border-primary" id="basic-addon1">
                             <i class="icon-search"></i>
                         </span>
                     </div>
                     <input 
+                    ref="i-buscar"
                     v-model="valor"
                     type="search"
                     class="form-control" 
@@ -18,7 +19,7 @@
                     >
                 </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 text-right">
+            <div class="col-12 col-sm-6 col-md-4 text-right px-0">
                 <button 
                 type="button" 
                 class="btn btn-primary"
@@ -30,9 +31,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 " style="overflow-x: auto;">
-                <table class="table table-stripedee w-100" style="min-width:800px; ">
-                    <thead>
+            <div class="col-12 px-0" style="overflow: auto; border-radius:6px;">
+                <table class="table table-stripedee w-100" style="min-width:850px;">
+                    <caption 
+                    v-if="usuarios.data.length === 0"
+                    style="width:100%; text-align: center;"
+                    >
+                        No se encontrarón resultados
+                    </caption>
+                    <thead class="bg-primary text-light">
                         <tr>
                             <th class="text-right" style="width:70px;">Item</th>
                             <th class="text-left" style="width:270px;">Nombres y apellidos</th>
@@ -132,31 +139,33 @@ export default {
         }
     },
     watch:{
-        '$route.query'(path){
-            console.log('watch ',path);
-            this.fetch_usuarios()
-        },
         valor(a){
             if(window.buscando) clearInterval(window.buscando)
             window.buscando = setTimeout(()=>{
-                console.log(a);
-                const query = this.$route.query
+                
+                //const query = {...this.$route.query}
+                const query = {}
+                query.page = 1
                 query.valor = a
+                
                 this.$router.push({query})
             },this.buscar_ttl)
         }
     },
     mounted(){
-        const page = +this.$route.query.page
-        if(!page) return this.$router.push({query: {page:1}})
-        
+        console.log('mounted');
+        if(this.$route.query.valor){
+            this.$refs['i-buscar'].focus()
+        }
         this.fetch_usuarios()
     },
     methods:{
         async fetch_usuarios(){
             let page = +this.$route.query.page
             if(!page) page = 1
-            const {data} = await usuariosTraer({page})
+            const query = {...this.$route.query}
+            query.page = page
+            const {data} = await usuariosTraer({...query})
             //console.log(data);
             this.usuarios = data
         },
@@ -165,8 +174,10 @@ export default {
             this.$refs['m-usuario'].toggle()
         },
         functionName(pageNum){
-            ///console.log(`${this.usuarios.path}?page=${pageNum}`);
-            this.$router.push({query:{page:pageNum}})
+            console.log(`${this.usuarios.path}?page=${pageNum}`);
+            const query = {...this.$route.query}
+            query.page = pageNum
+            this.$router.push({query})
         },
         usuarioEditar(row){
             this.usuarioSel = {...row}

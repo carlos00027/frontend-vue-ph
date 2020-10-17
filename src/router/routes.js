@@ -17,8 +17,15 @@ export default [
     },
     {
         path: '/usuarios',
-        name: 'usuarios.listar',
-        component: ()=>import('../views/usuarios/listar.vue').then(m=>m.default || m)
+        component: ()=>import('../views/usuarios/index.vue').then(m=>m.default || m),
+        children: [
+            {
+                path: '/',
+                name: 'usuarios.listar',
+                component: ()=>import('../views/usuarios/listar.vue').then(m=>m.default || m),
+            }
+
+        ]
     },
     {
         path:'/reportes',

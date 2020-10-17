@@ -280,7 +280,7 @@ export default {
                 const {status} = await registrar(this.form)
                 this.cargando = false
                 if(status === 201) mensaje('Mensaje','Usuario creado con éxito','success')
-                //this.limpiar()
+                this.limpiar()
                 this.$emit("usuario-creado")
                 this.toggle()
             } catch (error) {
