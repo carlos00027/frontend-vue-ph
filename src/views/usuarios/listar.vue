@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-12 px-0" style="overflow: auto; border-radius:6px;">
-                <table class="table table-stripedee w-100" style="min-width:850px;">
+                <table class="table table-striped w-100" style="min-width:850px;">
                     <caption 
                     v-if="usuarios.data.length === 0"
                     style="width:100%; text-align: center;"
