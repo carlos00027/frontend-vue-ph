@@ -1,7 +1,10 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home container">
+    <div>
+      <h1 class="font-weight-bold">
+        Binvenido a Pharmasan
+      </h1>
+    </div>
   </div>
 </template>
 
@@ -17,3 +20,11 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.home{
+  height: calc(100vh - 56px) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

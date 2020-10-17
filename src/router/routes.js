@@ -1,7 +1,4 @@
 
-import AuthLogin from '../views/auth/login.vue'
-import AuthRegistro from '../views/auth/registro.vue'
-
 export default [
     {
         path: '/',
@@ -22,6 +19,11 @@ export default [
         path: '/usuarios',
         name: 'usuarios.listar',
         component: ()=>import('../views/usuarios/listar.vue').then(m=>m.default || m)
+    },
+    {
+        path:'/reportes',
+        name: 'reportes',
+        component: ()=>import('../views/reportes/index.vue').then(m=>m.default || m)
     },
     {
         path: '*',

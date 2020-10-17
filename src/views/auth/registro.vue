@@ -10,6 +10,27 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <validation-provider
+                                :rules="{required:true}"
+                                name="rol"
+                                v-slot="{errors,classes}"
+                                >
+                                    <select v-model="form.rol_id" class="form-control" :class="classes">
+                                        <option 
+                                        v-for="(rol,k) in roles" 
+                                        :key="k" 
+                                        :value="rol.id" 
+                                        placeholder="Seleccionar"
+                                        >
+                                            {{rol.name}}
+                                        </option>
+                                    </select>
+                                    <span class="w-100 text-danger error">
+                                        {{errors[0]}}
+                                    </span>
+                                </validation-provider>
+                            </div>
                             <!-- nombres y apellidos -->
                             <div class="col-sm-12 form-group text-left">
 
@@ -154,17 +175,25 @@
 <script>
 import {registrar} from '../../services/auth'
 import {mensaje} from '../../utils/helper'
+import {rolesListar} from '../../services/roles.js'
 export default {
     data(){
         return {
             form:{
+                rol_id: null,
                 name: '',
                 email: '',
                 password: '',
                 password_confirm: ''
             },
-            cargando: false
+            cargando: false,
+            roles: []
         }
+    },
+    mounted(){
+        rolesListar().then(({data})=>{
+            this.roles = data
+        })
     },
     methods:{
         async guardar(){
@@ -186,6 +215,7 @@ export default {
             }
         },
         limpiar(){
+            this.form.rol_id = null
             this.form.name = ''
             this.form.email = ''
             this.form.password = ''
