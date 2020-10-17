@@ -57,7 +57,7 @@
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">
-                                                    <i class="icon-user"></i>
+                                                    <i class="icon-vcard"></i>
                                                 </span>
                                             </div>
                                             <input 
@@ -85,7 +85,7 @@
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">
-                                                    <i class="icon-user"></i>
+                                                    <i class="icon-mail"></i>
                                                 </span>
                                             </div>
                                             <input 
@@ -107,13 +107,13 @@
                                 <div class="col-sm-12">
                                     <validation-provider
                                     :rules="{required: true, max:700}"
-                                    name="correo"
+                                    name="dirección"
                                     v-slot="{errors,classes}"
                                     >
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">
-                                                    <i class="icon-user"></i>
+                                                    <i class="icon-location"></i>
                                                 </span>
                                             </div>
                                             <textarea 
