@@ -139,6 +139,22 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button 
+                    v-if="esEditar"
+                    type="button" 
+                    class="btn btn-primary"
+                    :disabled="cargando"
+                    @click="actualizar"
+                    >
+                        <span 
+                        class="spinner-border-sm" 
+                        :class="{'spinner-border': cargando}"
+                        role="status" 
+                        aria-hidden="true" 
+                        />
+                        Actualizar
+                    </button>
+                    <button
+                    v-else
                     type="button" 
                     class="btn btn-primary"
                     :disabled="cargando"
@@ -150,7 +166,7 @@
                         role="status" 
                         aria-hidden="true" 
                         />
-                        Guardar
+                        Crear
                     </button>
                 </div>
             </div>
@@ -160,9 +176,15 @@
 
 <script>
 import $ from 'jquery'
-import {clienteCrear} from '../../../services/clientes'
+import {clientesActualizar, clientesCrear} from '../../../services/clientes'
 import { mensaje } from '../../../utils/helper'
 export default {
+    props:{
+        cliente:{
+            type: Object,
+            default: ()=>({id:null})
+        }
+    },
     data(){
         return {
             cargando: false,
@@ -172,6 +194,24 @@ export default {
                 correo: '',
                 direccion: '',
             }
+        }
+    },
+    computed:{
+        esEditar(){
+            if(this.cliente.id) return true
+            return false
+        }
+    },
+    watch:{
+        'cliente.id'(id){
+            if(id){
+                this.form.nombres = this.cliente.nombres
+                this.form.documento = this.cliente.documento
+                this.form.correo = this.cliente.correo
+                this.form.direccion = this.cliente.direccion
+                return
+            }
+            this.limpiar()
         }
     },
     methods:{
@@ -190,7 +230,7 @@ export default {
             if(!esValido) return 
             try {
                 this.cargando = true;
-                const {status} = await clienteCrear(this.form)
+                const {status} = await clientesCrear(this.form)
                 this.cargando = false;
                 if(status === 201){
                     mensaje('Mensaje','Creado con éxito','success')
@@ -198,8 +238,24 @@ export default {
                     this.limpiar()
                     this.$emit('cliente-creado')
                 }
-                
-                
+            } catch (error) {
+                console.error(error);
+                this.cargando = false;
+            }
+        },
+        async actualizar(){
+            const esValido = await this.$refs['form-cliente'].validate()
+            if(!esValido) return 
+            try {
+                this.cargando = true;
+                const {status} = await clientesActualizar(this.cliente.id,this.form)
+                this.cargando = false;
+                if(status === 200){
+                    mensaje('Mensaje','Actualizado con éxito','success')
+                    this.toggle()
+                    this.limpiar()
+                    this.$emit('cliente-actualizado')
+                }
             } catch (error) {
                 console.error(error);
                 this.cargando = false;

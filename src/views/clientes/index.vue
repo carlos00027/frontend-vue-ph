@@ -20,7 +20,7 @@
                 <table class="table table-striped w-100" style="min-width:1100px;">
                     <thead class="bg-primary text-light">
                         <tr>
-                            <th style="width:  90px;" class="text-right">ID</th>
+                            <th style="width:  40px;" class="text-right">ID</th>
                             <th style="width: 200px;" class="text-left">Nombres</th>
                             <th style="width: 200px;" class="text-left">Documento</th>
                             <th style="width: 200px;" class="text-left">Correo electrónico</th>
@@ -49,6 +49,7 @@
                                     <button 
                                     type="button" 
                                     class="btn btn-sm px-2 btn-primary m-1"
+                                    @click="clienteEditar(cliente)"
                                     >
                                         Editar
                                     </button>
@@ -68,7 +69,9 @@
         </div>
         <modalCliente 
         ref="m-cliente"
+        :cliente="clienteSel"
         @cliente-creado="fetch_clientes"
+        @cliente-actualizado="fetch_clientes"
         />
     </section>
 </template>
@@ -115,6 +118,10 @@ export default {
         },
         clienteCrear(){
             this.clienteSel = {id:null}
+            this.$refs['m-cliente'].toggle()
+        },
+        clienteEditar(cliente){
+            this.clienteSel = {...cliente}
             this.$refs['m-cliente'].toggle()
         },
         clienteEliminar(cliente){
