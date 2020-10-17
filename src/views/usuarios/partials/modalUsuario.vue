@@ -120,16 +120,23 @@
                                     </div>
                                     <input 
                                     v-model="form.password"
-                                    type="password" 
+                                    :type="verClave ? 'text' : 'password'" 
                                     class="form-control" 
                                     :class="classes"
                                     placeholder="Contraseña" 
                                     aria-label="Username" 
                                     aria-describedby="basic-addon1"
                                     >
-                                    <span class="w-100 text-danger error">
-                                        {{errors[0]}}
-                                    </span>
+                                    <div class="input-group-append" @click="verClave = !verClave">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="icon-eye"></i>
+                                        </span>
+                                    </div>
+                                    <div class="w-100">
+                                        <span class="w-100 text-danger error">
+                                            {{errors[0]}}
+                                        </span>
+                                    </div>
                                 </validation-provider>
                             </div>
                             <!-- confirmar contrasena -->
@@ -219,6 +226,7 @@ export default {
     },
     data(){
         return {
+            verClave: false,
             cargando: false,
             form:{
                 rol_id: null,

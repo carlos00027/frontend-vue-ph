@@ -141,6 +141,7 @@ export default {
         },
         functionName(pageNum){
             console.log(`${this.usuarios.path}?page=${pageNum}`);
+            this.$router.push({query:{page:pageNum}})
         },
         usuarioEditar(row){
             this.usuarioSel = {...row}
