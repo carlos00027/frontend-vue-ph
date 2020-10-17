@@ -20,6 +20,7 @@
 
 <script>
 export default {
+    metaInfo: ()=>({title: 'Clientes'}),
     components:{
         modalCliente: ()=>import('./partials/modalCliente')
     },

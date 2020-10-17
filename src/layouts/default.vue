@@ -20,7 +20,13 @@ export default {
     .modal-content{
         border: none !important;
         box-shadow: 0 0 60px rgba(0,0,0,0.25);
-        border-radius: 2px;
+        border-radius: 8px;
+        overflow: hidden;
+
+        .modal-header{
+            background: #007bff;
+            color: white;
+        }
     }
 }
 </style>
