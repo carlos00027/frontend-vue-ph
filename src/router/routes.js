@@ -38,6 +38,11 @@ export default [
         component: ()=>import('../views/reportes/index.vue').then(m=>m.default || m)
     },
     {
+        path:'/medicamentos',
+        name: 'medicamentos',
+        component: ()=>import('../views/medicamentos/index.vue').then(m=>m.default || m)
+    },
+    {
         path: '*',
         component: ()=>import('../views/errors/404.vue')
     }
