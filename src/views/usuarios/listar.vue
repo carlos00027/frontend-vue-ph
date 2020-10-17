@@ -1,8 +1,18 @@
 <template>
     <section class="container">
-        <div class="row my-4">
+        <div class="row my-4 justify-content-between">
             <div class="col-12 col-sm-6 col-md-4">
                 <input type="search" class="form-control" placeholder="Buscar...">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 text-right">
+                <button 
+                type="button" 
+                class="btn btn-primary"
+                @click="agregar"
+                >
+                    <i class="icon-plus"></i>
+                    Agregar usuario
+                </button>
             </div>
         </div>
         <div class="row">
@@ -44,12 +54,20 @@
                 </table>
             </div>
         </div>
+        <modal-usuario 
+        ref="m-usuario" 
+        @usuario-creado="fetch_usuarios"
+        />
     </section>
 </template>
 
 <script>
 import {usuariosTraer} from '../../services/usuarios'
 export default {
+    metaInfo:()=>({title: 'Usuarios'}),
+    components:{
+        modalUsuario: ()=>import('./partials/modalUsuario')
+    },
     data(){
         return {
             usuarios: {
@@ -65,6 +83,9 @@ export default {
             const {data} = await usuariosTraer()
             console.log(data);
             this.usuarios = data
+        },
+        agregar(){
+            this.$refs['m-usuario'].toggle()
         }
     }
 }
