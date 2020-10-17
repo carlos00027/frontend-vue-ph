@@ -2,8 +2,9 @@
 
  
 .icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-eye:before { content: '\e09d'; } /* '' */
 .icon-plus:before { content: '\e0c1'; } /* '' */
-.icon-eye:before { content: '\e70a'; } /* '' */
+.icon-eye-off:before { content: '\e102'; } /* '' */
 .icon-user:before { content: '\f061'; } /* '' */
 .icon-chart-area:before { content: '\f1fe'; } /* '' */
 .icon-key:before { content: '🔑'; } /* '\1f511' */

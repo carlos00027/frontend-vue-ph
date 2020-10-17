@@ -114,7 +114,7 @@
                                 vid="contrasena"
                                 >
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">
+                                        <span class="input-group-text">
                                             <i class="icon-key"></i>
                                         </span>
                                     </div>
@@ -124,12 +124,15 @@
                                     class="form-control" 
                                     :class="classes"
                                     placeholder="Contraseña" 
-                                    aria-label="Username" 
-                                    aria-describedby="basic-addon1"
+                                    aria-label="password" 
                                     >
-                                    <div class="input-group-append" @click="verClave = !verClave">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <i class="icon-eye"></i>
+                                    <div 
+                                    class="input-group-append" 
+                                    style="cursor:pointer;"
+                                    @click="verClave = !verClave"
+                                    >
+                                        <span class="input-group-text">
+                                            <i :class="verClave ? 'icon-eye-off' : 'icon-eye'" />
                                         </span>
                                     </div>
                                     <div class="w-100">

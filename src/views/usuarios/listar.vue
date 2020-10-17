@@ -2,7 +2,19 @@
     <section class="container">
         <div class="row my-4 justify-content-between">
             <div class="col-12 col-sm-6 col-md-4">
-                <input type="search" class="form-control" placeholder="Buscar...">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input 
+                    v-model="valor"
+                    type="search"
+                    class="form-control" 
+                    aria-label="Username" 
+                    aria-describedby="basic-addon1"
+                    placeholder="Buscar..."
+                    >
+                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-4 text-right">
                 <button 
@@ -101,6 +113,7 @@ export default {
     data(){
         return {
             pagina: +this.$route.query.page,
+            valor: this.$route.query.valor || '',
             usuarios: {
                 total: 0,
                 per_page: 0,
@@ -121,7 +134,6 @@ export default {
         }
     },
     mounted(){
-        console.log('mounted');
         const page = +this.$route.query.page
         if(!page) return this.$router.push({query: {page:1}})
         
@@ -132,7 +144,7 @@ export default {
             let page = +this.$route.query.page
             if(!page) page = 1
             const {data} = await usuariosTraer({page})
-            console.log(data);
+            //console.log(data);
             this.usuarios = data
         },
         agregar(){
@@ -140,7 +152,7 @@ export default {
             this.$refs['m-usuario'].toggle()
         },
         functionName(pageNum){
-            console.log(`${this.usuarios.path}?page=${pageNum}`);
+            ///console.log(`${this.usuarios.path}?page=${pageNum}`);
             this.$router.push({query:{page:pageNum}})
         },
         usuarioEditar(row){
