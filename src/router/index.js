@@ -19,8 +19,8 @@ const routes = [
     component: AuthLogin
   },
   {
-    path: '/auth/registro',
-    name: 'auth.registro',
+    path: '/auth/registrar',
+    name: 'auth.registrar',
     component: AuthRegistro
   },
   {

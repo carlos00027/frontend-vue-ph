@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import * as types from '../mutation-types'
+
+import {user} from '../../services/auth'
 
 // state
 export const state = {
@@ -17,28 +18,28 @@ export const getters = {
 
 // mutations
 export const mutations = {
-  [types.SAVE_TOKEN] (state, { token, remember }) {
-    state.token = token
-    Cookies.set('token', token, { expires: remember ? 365 : null })
+  SAVE_TOKEN(state, { access_token, remember }){
+    state.token = access_token
+    Cookies.set('token', access_token, { expires: remember ? 365 : null })
   },
 
-  [types.FETCH_USER_SUCCESS] (state, { user }) {
+  FETCH_USER_SUCCESS(state, { user }){
     state.user = user
   },
 
-  [types.FETCH_USER_FAILURE] (state) {
+  FETCH_USER_FAILURE(state){
     state.token = null
     Cookies.remove('token')
   },
 
-  [types.LOGOUT] (state) {
+  LOGOUT(state){
     state.user = null
     state.token = null
 
     Cookies.remove('token')
   },
 
-  [types.UPDATE_USER] (state, { user }) {
+  UPDATE_USER(state, { user }){
     state.user = user
   }
 }
@@ -46,21 +47,22 @@ export const mutations = {
 // actions
 export const actions = {
   saveToken ({ commit, dispatch }, payload) {
-    commit(types.SAVE_TOKEN, payload)
+    commit('SAVE_TOKEN', payload)
   },
 
   async fetchUser ({ commit }) {
     try {
-      const { data } = await axios.get('/api/user')
+      //const { data } = await axios.get('/api/user')
+      const { data } = await user()
 
-      commit(types.FETCH_USER_SUCCESS, { user: data })
+      commit('FETCH_USER_SUCCESS', { user: data })
     } catch (e) {
-      commit(types.FETCH_USER_FAILURE)
+      commit('FETCH_USER_FAILURE')
     }
   },
 
   updateUser ({ commit }, payload) {
-    commit(types.UPDATE_USER, payload)
+    commit('UPDATE_USER', payload)
   },
 
   async logout ({ commit }) {
@@ -68,7 +70,7 @@ export const actions = {
       await axios.post('/api/logout')
     } catch (e) { }
 
-    commit(types.LOGOUT)
+    commit('LOGOUT')
   },
 
   async fetchOauthUrl (ctx, { provider }) {

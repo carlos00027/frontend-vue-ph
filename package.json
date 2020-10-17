@@ -11,6 +11,7 @@
     "bootstrap": "^4.5.3",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
+    "js-cookie": "^2.2.1",
     "popper.js": "^1.16.1",
     "sweetalert2": "^10.6.1",
     "vee-validate": "^3.4.2",

@@ -78,6 +78,14 @@
                                     Ingresar
                                 </button>
                             </div>
+                            <div class="col-12 my-2">
+                                <router-link 
+                                :to="{name: 'auth.registrar'}"
+                                class="btn btn-outline-primary btn-block"
+                                >
+                                    Registrarme
+                                </router-link>
+                            </div>
                         </div>
                     </form>
                 </validation-observer>
@@ -100,6 +108,10 @@ export default {
             }
         }
     },
+    mounted(){
+        let email = this.$route.query.email
+        if(email) this.form.email = email
+    },
     methods:{
         async ingresar(){
             const esValido = await this.$refs['el-form-login'].validate()
@@ -107,10 +119,12 @@ export default {
             
             try {
                 this.cargando = true
-                const {status} = await login(this.form)
+                const {status,data} = await login(this.form)
                 this.cargando = false
                 if(status === 200){
-
+                    await this.$store.dispatch('auth/saveToken',data)
+                    await this.$store.dispatch('auth/fetchUser')
+                    this.$router.push({name: 'home'})
                 }   
             } catch (error) {
                 this.cargando = false
