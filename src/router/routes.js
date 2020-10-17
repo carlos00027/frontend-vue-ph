@@ -19,6 +19,11 @@ export default [
         component: ()=>import('../views/auth/registro.vue').then(m=>m.default || m)
     },
     {
+        path: '/usuarios',
+        name: 'usuarios.listar',
+        component: ()=>import('../views/usuarios/listar.vue').then(m=>m.default || m)
+    },
+    {
         path: '*',
         component: ()=>import('../views/errors/404.vue')
     }

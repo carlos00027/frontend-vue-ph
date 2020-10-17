@@ -1,7 +1,7 @@
 <template>
     <section>
         <navbar />
-        <router-view />
+        <router-view class="ajuste" />
     </section>
 </template>
 <script>
@@ -11,3 +11,9 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+.ajuste{
+    position: relative;
+    top: 56px;
+}
+</style>

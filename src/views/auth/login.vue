@@ -99,6 +99,8 @@
 import {login} from '../../services/auth'
 import { mensaje } from '../../utils/helper'
 export default {
+    layout: 'basic',
+    middleware: 'guest',
     data(){
         return {
             cargando: false,

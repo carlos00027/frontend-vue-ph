@@ -1,6 +1,8 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-primary bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <router-link to="/" class="navbar-brand">
+            Pharmasan
+        </router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,7 +10,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <router-link :to="{name: 'usuarios.listar'}" class="nav-link">
+                    <i class="icon-user"></i>
+                    Usuarios
+                </router-link>  
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -35,8 +40,3 @@
         </div>
         </nav>
 </template>
-<script>
-export default {
-    name:'Navbar'
-}
-</script>
