@@ -35,6 +35,12 @@
       "css": "chart-area",
       "code": 61950,
       "src": "fontawesome"
+    },
+    {
+      "uid": "25fc99a30fecc4021fdcae5fff5ba9ac",
+      "css": "eye",
+      "code": 59146,
+      "src": "entypo"
     }
   ]
 }

@@ -109,7 +109,7 @@
                                 tag="div" 
                                 name="contraseña"
                                 class="input-group mb-3"
-                                :rules="{required:true,min:6,max:100}"
+                                :rules="{required: esEditar ? false : true,min:6,max:100}"
                                 v-slot="{errors,classes}"
                                 vid="contrasena"
                                 >
@@ -138,7 +138,7 @@
                                 tag="div" 
                                 name="confirmar contraseña"
                                 class="input-group mb-3"
-                                :rules="{required:true,confirmed:'contrasena'}"
+                                :rules="{required: form.password.length ? true : false, confirmed:'contrasena'}"
                                 v-slot="{errors,classes}"
                                 >
                                     <div class="input-group-prepend">
@@ -169,6 +169,7 @@
                     Cerrar
                 </button>
                 <button 
+                v-if="!esEditar"
                 type="button" 
                 class="btn btn-primary"
                 :disabled="cargando"
@@ -180,7 +181,22 @@
                     role="status" 
                     aria-hidden="true" 
                     />
-                    Crear Usuario
+                    Crear
+                </button>
+                <button 
+                v-else
+                type="button" 
+                class="btn btn-primary"
+                :disabled="cargando"
+                @click="actualizar"
+                >
+                    <span 
+                    class="spinner-border-sm" 
+                    :class="{'spinner-border': cargando}"
+                    role="status" 
+                    aria-hidden="true" 
+                    />
+                    Actualizar
                 </button>
             </div>
             </div>
@@ -193,15 +209,44 @@ import $ from 'jquery'
 import { rolesListar } from '../../../services/roles'
 import { registrar } from '../../../services/auth'
 import { mensaje } from '../../../utils/helper'
+import { usuariosActualizar } from '../../../services/usuarios'
 export default {
+    props:{
+        usuario:{
+            type: Object,
+            default: ()=>({id:null})
+        }
+    },
     data(){
         return {
             cargando: false,
             form:{
                 rol_id: null,
-                name: ''
+                name: '',
+                email: '',
+                password: '',
+                password_confirm:''
             },
             roles: []
+        }
+    },
+    computed:{
+        esEditar(){
+            if(this.usuario.id) return true
+            return false
+        }
+    },
+    watch:{
+        'usuario.id'(id){
+            if(id){
+                this.form.name = this.usuario.name
+                this.form.rol_id = this.usuario.rol_id
+                this.form.email = this.usuario.email
+                this.form.password = ''
+                this.form.password_confirm = ''
+                return
+            }
+            this.limpiar()
         }
     },
     mounted(){
@@ -223,9 +268,27 @@ export default {
                 this.cargando = true
                 const {status} = await registrar(this.form)
                 this.cargando = false
-                if(status === 201) mensaje('Mensaje','Usuario creado con exito','success')
-                this.limpiar()
+                if(status === 201) mensaje('Mensaje','Usuario creado con éxito','success')
+                //this.limpiar()
                 this.$emit("usuario-creado")
+                this.toggle()
+            } catch (error) {
+                this.cargando = false
+                console.error(error);
+            }
+        },
+        async actualizar(){
+            let esValido = await this.$refs['el-form-login'].validate()
+            console.log(esValido);
+            if(!esValido) return 
+            
+            try {
+                this.cargando = true
+                const {status} = await usuariosActualizar(this.usuario.id,this.form)
+                this.cargando = false
+                if(status === 200) mensaje('Mensaje','Usuario actualizado con éxito','success')
+                //this.limpiar()
+                this.$emit("usuario-actualizado")
                 this.toggle()
             } catch (error) {
                 this.cargando = false
