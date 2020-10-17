@@ -71,6 +71,18 @@
       "css": "users",
       "code": 61540,
       "src": "mfglabs"
+    },
+    {
+      "uid": "933f454f9d3342a055217fd695475d44",
+      "css": "vcard",
+      "code": 57395,
+      "src": "typicons"
+    },
+    {
+      "uid": "gjt8ba5q0n3nn8ptw6324sflr8qoaeam",
+      "css": "location",
+      "code": 57493,
+      "src": "typicons"
     }
   ]
 }
