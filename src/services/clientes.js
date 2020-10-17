@@ -1,7 +1,11 @@
 import Axios from 'axios'
 
-export const clienteCrear = (payload) => Axios.post(`/clientes`,payload)
+export const clientesListar = (payload) => Axios(`/clientes`,{params:{...payload}})
+export const clientesCrear = (payload) => Axios.post(`/clientes`,payload)
+export const clientesEliminar = (id) => Axios.delete(`/clientes/${id}`)
 
 export default {
-    clienteCrear
+    clientesListar,
+    clientesCrear,
+    clientesEliminar
 }

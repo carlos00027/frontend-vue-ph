@@ -196,6 +196,7 @@ export default {
                     mensaje('Mensaje','Creado con éxito','success')
                     this.toggle()
                     this.limpiar()
+                    this.$emit('cliente-creado')
                 }
                 
                 
