@@ -28,7 +28,7 @@ export default {
     }
   },
   metaInfo () {
-    const { appName } = 'Pharmasan'
+    const  appName  = 'Pharmasan'
     return {
       title: appName,
       titleTemplate: `%s · ${appName}`

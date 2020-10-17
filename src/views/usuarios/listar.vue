@@ -6,12 +6,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 ">
-                <table class="table table-stripedee w-100 ">
+            <div class="col-12 " style="overflow-x: auto;">
+                <table class="table table-stripedee w-100" style="min-width:800px; ">
                     <thead>
                         <tr>
-                            <th class="text-left">Nombres y apellidos</th>
+                            <th class="text-left" style="width:270px;">Nombres y apellidos</th>
                             <th class="text-left">Correo electrónico</th>
+                            <th class="text-left">Rol</th>
                             <th class="text-right">Acciones</th>
                         </tr>
                     </thead>
@@ -22,6 +23,7 @@
                                     {{usuario.name}}
                                 </td>
                                 <td class="text-left">{{usuario.email}}</td>
+                                <td class="text-left" style="width:110px;">{{usuario.rol.name}}</td>
                                 <td class="text-right" style="width:170px;">
                                     <router-link 
                                     :to="{name:'usuarios.editar',params:{id:usuario.id}}"

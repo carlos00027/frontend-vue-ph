@@ -16,6 +16,7 @@
                                 name="rol"
                                 v-slot="{errors,classes}"
                                 >
+                                    <label for="" class="text-left w-100 mb-0">Rol</label>
                                     <select v-model="form.rol_id" class="form-control" :class="classes">
                                         <option 
                                         v-for="(rol,k) in roles" 
@@ -177,10 +178,13 @@ import {registrar} from '../../services/auth'
 import {mensaje} from '../../utils/helper'
 import {rolesListar} from '../../services/roles.js'
 export default {
+    layout: 'basic',
+    middleware: 'guest',
+    metaInfo: ()=>({title: 'Registro'}),
     data(){
         return {
             form:{
-                rol_id: null,
+                rol_id: 1,
                 name: '',
                 email: '',
                 password: '',

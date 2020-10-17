@@ -56,6 +56,7 @@
                                     placeholder="contraseña" 
                                     aria-label="password" 
                                     aria-describedby="basic-addon1"
+                                    @keyup.enter="ingresar"
                                     >
                                     <span class="w-100 text-danger error">
                                         {{errors[0]}}
@@ -101,6 +102,7 @@ import { mensaje } from '../../utils/helper'
 export default {
     layout: 'basic',
     middleware: 'guest',
+    metaInfo: ()=>({title: 'Inicio de sesión'}),
     data(){
         return {
             cargando: false,
