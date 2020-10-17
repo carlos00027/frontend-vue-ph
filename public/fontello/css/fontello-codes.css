@@ -6,6 +6,9 @@
 .icon-eye:before { content: '\e09d'; } /* '' */
 .icon-plus:before { content: '\e0c1'; } /* '' */
 .icon-eye-off:before { content: '\e102'; } /* '' */
+.icon-pharmacy:before { content: '\e829'; } /* '' */
 .icon-user:before { content: '\f061'; } /* '' */
+.icon-users:before { content: '\f064'; } /* '' */
 .icon-chart-area:before { content: '\f1fe'; } /* '' */
+.icon-heartbeat:before { content: '\f21e'; } /* '' */
 .icon-key:before { content: '🔑'; } /* '\1f511' */

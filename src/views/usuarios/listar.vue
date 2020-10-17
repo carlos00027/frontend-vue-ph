@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <div class="row mt-4 justify-content-between">
+        <div class="row mt-5 justify-content-between">
             <div class="col-12 col-sm-6 col-md-4 px-0">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

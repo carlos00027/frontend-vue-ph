@@ -30,6 +30,18 @@
                         Reportes
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link :to="{name: 'medicamentos'}" class="nav-link" active-class="active">
+                        <i class="icon-pharmacy"></i>
+                        Clientes
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name: 'medicamentos'}" class="nav-link" active-class="active">
+                        <i class="icon-pharmacy"></i>
+                        Medicamentos
+                    </router-link>
+                </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown

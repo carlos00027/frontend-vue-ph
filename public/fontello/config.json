@@ -53,6 +53,24 @@
       "css": "search",
       "code": 57406,
       "src": "elusive"
+    },
+    {
+      "uid": "d84a06c5ce6da9ebdc9b0a5cb94db4c4",
+      "css": "heartbeat",
+      "code": 61982,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "ee10c11395b5660a1e10a19cd66ea654",
+      "css": "pharmacy",
+      "code": 59433,
+      "src": "maki"
+    },
+    {
+      "uid": "05ef9b5e8742971aa85b23cfcbe71594",
+      "css": "users",
+      "code": 61540,
+      "src": "mfglabs"
     }
   ]
 }
