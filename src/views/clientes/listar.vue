@@ -30,7 +30,7 @@
                 </button>
             </div>
         </div>
-        <div class="row mt-3 mx-0">
+        <div class="row  mx-0">
             <div class="col-12 px-0" style="overflow:auto; border-radius: 6px;">
                 <table class="table table-striped w-100" style="min-width:1100px;">
                     <caption class="w-100 text-center">
