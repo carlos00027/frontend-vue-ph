@@ -43,19 +43,19 @@
                             <div class="col-12">
                                 <validation-provider 
                                 tag="div" 
-                                name="password"
+                                name="contraseña"
                                 class="input-group mb-3"
                                 :rules="{required:true,max:100}"
                                 v-slot="{errors,classes}"
                                 >
-                                    <div class="input-group-prepend">
+                                    <div class="input-group-prepend" @click="esVisible = !esVisible">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <i class="icon-key"></i>
+                                            <i :class=" esVisible ? 'icon-eye-off' : 'icon-eye'"></i>
                                         </span>
                                     </div>
                                     <input 
                                     v-model="form.password"
-                                    type="password" 
+                                    :type="esVisible ? 'text' : 'password'" 
                                     class="form-control" 
                                     :class="classes"
                                     placeholder="contraseña" 
@@ -125,6 +125,7 @@ export default {
     metaInfo: ()=>({title: 'Inicio de sesión'}),
     data(){
         return {
+            esVisible: false,
             cargando: false,
             form:{
                 email: '',
@@ -153,6 +154,10 @@ export default {
             } catch (error) {
                 this.cargando = false
                 console.error(error);
+                if(error.response.status === 401){
+                    mensaje('Advertencia','Credenciales no válidas','warning')
+                    this.form.password = ''
+                }
             }
         }
     }

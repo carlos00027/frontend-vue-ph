@@ -183,6 +183,7 @@ export default {
     metaInfo: ()=>({title: 'Registro'}),
     data(){
         return {
+            esVisible: false,
             form:{
                 rol_id: 1,
                 name: '',
