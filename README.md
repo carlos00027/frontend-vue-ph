@@ -1,4 +1,4 @@
-# frontend
+# Proyecto realizado en VUE
 
 ## Iniciar la configuracion
 ```
@@ -11,6 +11,8 @@ Duplicar el archivo .env.example  y llamarlo .env.local el endpoint debe seterar
 
 
 ### compilar modo desarrollo
+
+Con la ejecucion de este comando bastará para testear esta aplicacion
 ```
 npm run serve
 ```
