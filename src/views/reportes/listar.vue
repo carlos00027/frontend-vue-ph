@@ -175,9 +175,9 @@ export default {
                 cuerpo += `\n`
             }
 
-            const blobExcel = new Blob([cuerpo],{type: 'application/csv'})
+            const blobCsv = new Blob([cuerpo],{type: 'application/csv'})
             const elLink = document.createElement('a')
-            elLink.href = URL.createObjectURL(blobExcel)
+            elLink.href = URL.createObjectURL(blobCsv)
             elLink.download = `medicamentos-pagina-${this.$route.query.page}.csv`
             elLink.click()
         }
