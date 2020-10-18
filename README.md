@@ -1,6 +1,6 @@
 # Proyecto realizado en VUE
 
-## Iniciar la configuracion
+### Iniciar la configuracion
 ```
 npm install
 ```
