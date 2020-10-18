@@ -1,6 +1,6 @@
 <template>
     <section>
-        los reportes
+        <router-view :key="$route.fullPath" />
     </section>
 </template>
 

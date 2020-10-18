@@ -41,8 +41,14 @@ export default [
     },
     {
         path:'/reportes',
-        name: 'reportes',
-        component: ()=>import('../views/reportes/index.vue').then(m=>m.default || m)
+        component: ()=>import('../views/reportes/index.vue').then(m=>m.default || m),
+        children:[
+            {
+                path: '/',
+                name: 'reportes',
+                component: ()=>import('../views/reportes/listar.vue').then(m=>m.default || m),
+            }
+        ]
     },
     {
         path:'/medicamentos',

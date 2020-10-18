@@ -12,6 +12,9 @@ export default {
 }
 </script>
 <style lang="scss">
+#app{
+    font-size: 14px;
+}
 .ajuste7887{
     position: relative;
     top: 76px;
