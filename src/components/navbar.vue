@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-lg">
         <div class="container px-0">
         <router-link to="/" class="navbar-brand d-flex align-items-center" active-class="active" >
             <div style="height:50px; display:flex;">
@@ -15,10 +15,8 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             
-
-            
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li v-if="tieneLogin ? usuario.rol_id === 1 : false" class="nav-item">
                     <router-link :to="{name: 'usuarios.listar'}" class="nav-link" active-class="active">
                         <i class="icon-user"></i>
                         Usuarios
@@ -58,14 +56,31 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li> -->
             </ul>
-            <div>
-                <button 
-                type="button" 
-                class="btn btn-danger"
-                @click="cerrar_sesion"
-                >
-                    Cerrar sesión
-                </button>
+            <div class="d-flex align-items-center flex-column">
+                <div class="w-100 mr-2 text-light">
+                    <div class="text-right">
+                        <span>
+                            <i class="icon-user"></i>
+                        </span>
+                        <span class="text-uppercase">
+                            {{tieneLogin ? usuario.name : ''}}
+                        </span>
+                    </div>
+                    <div style="font-size: 12px;" class="text-right">
+                        <span class="font-weight-bold mr-2">Rol:</span>
+                        <span v-if="tieneLogin ? usuario.rol_id === 1 : false">Administrador</span>
+                        <span v-else-if=" tieneLogin ? usuario.rol_id === 2 : false">Vendedor</span>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end">    
+                    <button
+                    type="button" 
+                    class="btn btn-danger btn-sm py-1"
+                    @click="cerrar_sesion"
+                    >
+                        Cerrar sesión
+                    </button>
+                </div>
             </div>
             <!-- <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -76,7 +91,14 @@
     </nav>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
+    computed:{
+        ...mapGetters({
+            tieneLogin: 'auth/check',
+            usuario: 'auth/user'
+        })
+    },
     methods:{
         async cerrar_sesion(){
             await this.$store.dispatch('auth/logout')

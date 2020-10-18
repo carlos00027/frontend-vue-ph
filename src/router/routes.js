@@ -56,6 +56,11 @@ export default [
         component: ()=>import('../views/medicamentos/index.vue').then(m=>m.default || m)
     },
     {
+        path: '/no-autorizado',
+        name: 'error.401',
+        component: ()=>import('../views/errors/401.vue').then(m=>m.default || m)
+    },
+    {
         path: '*',
         component: ()=>import('../views/errors/404.vue')
     }
