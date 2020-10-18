@@ -29,8 +29,15 @@ export default [
     },
     {
         path: '/clientes',
-        name: 'clientes',
-        component: ()=>import('../views/clientes/index.vue').then(m=>m.default || m)
+        component: ()=>import('../views/clientes/index.vue').then(m=>m.default || m),
+        children:[
+            {
+                path: '/',
+                name: 'clientes',
+                component: ()=>import('../views/clientes/listar.vue').then(m=>m.default || m),
+            }
+        ]
+
     },
     {
         path:'/reportes',
